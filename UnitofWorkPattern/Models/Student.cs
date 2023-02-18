@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using UnitofWorkPattern.Enums;
 
 namespace UnitofWorkPattern.Models;
 public partial class Student : BaseEntity
@@ -11,6 +12,7 @@ public partial class Student : BaseEntity
     public string? FirstName { get; set; }
     public string? LastName { get; set; }
     public int Id_Group { get; set; }
+    public Gender Gender { get; set; }
 
     // Navigation Property
     public Group? Group { get; set; }
