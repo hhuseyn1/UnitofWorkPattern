@@ -3,9 +3,9 @@ using Microsoft.Extensions.Configuration;
 using System.Reflection;
 using UnitofWorkPattern.Models;
 
-namespace UnitofWorkPattern.Contexts;
+namespace UnitofWorkPattern.DAL.Contexts;
 
-public class LibraryDbContext : DbContext
+public class AppDbContext : DbContext
 {
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -19,7 +19,7 @@ public class LibraryDbContext : DbContext
         base.OnConfiguring(optionsBuilder);
     }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder) 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
         => modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
     public DbSet<Student> Students { get; set; }
