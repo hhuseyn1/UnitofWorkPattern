@@ -2,12 +2,12 @@
 
 namespace UnitofWorkPattern.DAL;
 
-public interface IStudentRepository : IDisposable
+public interface IStudentRepository <T> where T : class
 {
-    IEnumerable<Student> GetStudents();
-    Student GetStudentByID(int studentId);
-    void InsertStudent(Student student);
+    IEnumerable<T> GetStudents(Func<T, bool>? predicate = null);
+    T GetStudentByID(int studentId);
+    void InsertStudent(T student);
     void DeleteStudent(int studentID);
-    void UpdateStudent(Student student);
+    void UpdateStudent(T student);
     void Save();
 }

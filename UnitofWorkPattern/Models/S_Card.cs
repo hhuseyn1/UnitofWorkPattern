@@ -1,6 +1,6 @@
 ﻿namespace UnitofWorkPattern.Models;
 
-public class S_Card
+public class S_Card : BaseEntity
 {
     public int Id_Student { get; set; }
     public int Id_Book { get; set; }

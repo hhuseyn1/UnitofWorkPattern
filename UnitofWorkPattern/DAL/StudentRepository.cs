@@ -1,15 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 using UnitofWorkPattern.DAL.Contexts;
 using UnitofWorkPattern.Models;
 
 namespace UnitofWorkPattern.DAL;
 
-public class StudentRepository : IStudentRepository
+public class StudentRepository<T> : IStudentRepository<T> where T : BaseEntity
 {
     private AppDbContext context;
+    private readonly DbSet<T> dbSet;
 
     public StudentRepository(AppDbContext context)
     {
+        ArgumentNullException.ThrowIfNull(context, nameof(context));
+
+        dbSet = context.Set<T>();
         this.context = context;
     }
 
@@ -36,14 +41,15 @@ public class StudentRepository : IStudentRepository
         GC.SuppressFinalize(this);
     }
 
-    public Student GetStudentByID(int studentId) => context.Students.Find(studentId);
-
-    public IEnumerable<Student> GetStudents() => context.Students.ToList();
-
+    public T GetStudentByID(int studentId) =>  dbSet.Find(studentId);
+    public IEnumerable<T> GetStudents(Func<T, bool>? predicate = null) => predicate is null ? dbSet.ToList() : dbSet.Where(predicate).ToList();
     public void InsertStudent(Student student) => context.Students.Add(student);
 
     public void Save() => context.SaveChanges();
 
-    public void UpdateStudent(Student student) => context.Entry(student).State = EntityState.Modified;
+
+    public void InsertStudent(T student) => dbSet.Add(student);
+
+    public void UpdateStudent(T student) => dbSet.Update(student);
 
 }
