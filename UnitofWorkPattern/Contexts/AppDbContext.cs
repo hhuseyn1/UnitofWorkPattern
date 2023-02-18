@@ -7,7 +7,6 @@ namespace UnitofWorkPattern.Contexts;
 
 public class LibraryDbContext : DbContext
 {
-
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         var configuration = new ConfigurationBuilder()

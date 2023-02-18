@@ -1,12 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore;
 using UnitofWorkPattern.Models;
 
 namespace UnitofWorkPattern.Configurations;
 
-public class AuthorConfigs : IEntityTypeConfiguration<Author>
+
+public class LibConfigs : IEntityTypeConfiguration<Lib>
 {
-    public void Configure(EntityTypeBuilder<Author> builder)
+    public void Configure(EntityTypeBuilder<Lib> builder)
     {
         builder.Property(x => x.FirstName)
             .IsRequired();
