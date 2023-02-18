@@ -9,11 +9,10 @@ public class AppDbContext : DbContext
 {
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        var configuration = new ConfigurationBuilder()
-                    .AddJsonFile("appsettings.json")
-                    .Build();
+        var configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory() + "../../../../")
+                             .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true).Build();
 
-        var connectionString = configuration.GetConnectionString("LibraryDb");
+        var connectionString = configuration.GetConnectionString("SqlServerLibrary");
 
         optionsBuilder.UseSqlServer(connectionString);
         base.OnConfiguring(optionsBuilder);
